@@ -4,6 +4,7 @@ import sys
 import time
 from utility import resource_path
 from board import Board
+from input import Input
 
 #Setting up pygame
 pygame.init()
@@ -25,12 +26,13 @@ last_time = time.time()
 
 #loading sprites
 redcoin_img = pygame.image.load(resource_path('game/sprites/redcoin-sheet.png')).convert_alpha()
-greencoing_img = pygame.image.load(resource_path('game/sprites/greencoin-sheet.png')).convert_alpha()
-board_img = pygame.image.load(resource_path('game/sprites/board-sheet.png')).convert_alpha()
+greencoin_img = pygame.image.load(resource_path('game/sprites/greencoin-sheet.png')).convert_alpha()
+board_spritesheet = pygame.image.load(resource_path('game/sprites/board-sheet.png')).convert_alpha()
 
 
 #main game loop
-b = Board(132, 27, board_img, screen)
+board = Board(132, 27, board_spritesheet, screen)
+input = Input(greencoin_img, screen)
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -42,7 +44,8 @@ while running:
     fps = gameClock.get_fps()
     fps_text = font.render(f"FPS: {fps:.0f}", True, (255, 255, 255))
     screen.blit(fps_text, (10, 10))
-    b.update()
+    board.update(dt)
+    input.update()
     pygame.display.flip()
 
     now = time.time()
