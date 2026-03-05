@@ -55,7 +55,7 @@ class Input:
                 if (pygame.mouse.get_pressed()[0] and self.board.is_full(placement[1], placement[2], placement[3]) == False):
                     coin = Coin(self.screen, self.image, placement[1], placement[2], (placement[0].x, placement[0].y), self.team, placement[3], self.board)
                     self.board.add_coin(coin, placement[1], placement[2])
-                    coin.play_coin(placement[3])
+                    self.board.play_coin(coin, placement[3])
                     self.team = (self.team + 1) % 2
                     self.image = self.images[self.team]
                     time.sleep(0.1)
