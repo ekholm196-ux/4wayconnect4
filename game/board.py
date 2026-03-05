@@ -26,58 +26,74 @@ class Board:
         frame_rect = pygame.Rect(self.index * frame_width, 0, frame_width, frame_height)
         self.screen.blit(self.image, (self.x ,self.y), frame_rect)
 
-    def play_coin(self, coin, direction):
+    def pack_down(self, coin):
         empty_space = 0
+        for row in range(5, -1, -1):
+            if (self.grid[row][coin.col] == None):
+                empty_space += 1 
+            else:
+                c = self.grid[row][coin.col]
+                self.grid[row][coin.col] = None
+                self.grid[(row + empty_space)][coin.col] = c
+                c.move(row + empty_space, coin.col)
+        landing_row = empty_space - 1
+        self.grid[landing_row][coin.col] = coin
+        coin.move(landing_row, coin.col)
+
+    def pack_up(self, coin):
+        empty_space = 0
+        for row in range(0, 6, 1):
+            if (self.grid[row][coin.col] == None):
+                empty_space += 1
+            else:
+                c = self.grid[row][coin.col]
+                self.grid[row][coin.col] = None
+                self.grid[(row - empty_space)][coin.col] = c
+                c.move(row - empty_space, coin.col)
+        landing_row = 6 - empty_space
+        self.grid[landing_row][coin.col] = coin
+        coin.move(landing_row, coin.col)
+
+    def pack_right(self, coin):
+        empty_space = 0
+        for col in range(5, -1, -1):
+            if (self.grid[coin.row][col] == None):
+                empty_space += 1
+            else:
+                c = self.grid[coin.row][col]
+                self.grid[coin.row][col] = None
+                self.grid[coin.row][col + empty_space] = c
+                c.move(coin.row, col + empty_space)
+        landing_col = empty_space - 1
+        self.grid[coin.row][landing_col] = coin
+        coin.move(coin.row, landing_col)
+
+    def pack_left(self, coin):
+        empty_space = 0
+        for col in range(0, 6, 1):
+            if (self.grid[coin.row][col] == None):
+                empty_space += 1
+            else:
+                c = self.grid[coin.row][col]
+                self.grid[coin.row][col] = None
+                self.grid[coin.row][col - empty_space] = c
+                c.move(coin.row, col - empty_space)
+        landing_col = 6 - empty_space
+        self.grid[coin.row][landing_col] = coin
+        coin.move(coin.row, landing_col)
+
+    def add_coin(self, coin, direction):
+        self.coins.append(coin)
+        self.updated = False
         match direction:
             case "DOWN":
-                for row in range(5, -1, -1):
-                    if (self.grid[row][coin.col] == None):
-                        empty_space += 1 
-                    else:
-                        c = self.grid[row][coin.col]
-                        self.grid[row][coin.col] = None
-                        self.grid[(row + empty_space)][coin.col] = c
-                        c.move(row + empty_space, coin.col)
-                landing_row = empty_space - 1
-                self.grid[landing_row][coin.col] = coin
-                coin.move(landing_row, coin.col)
+                self.pack_down(coin)
             case "UP":
-                for row in range(0, 6, 1):
-                    if (self.grid[row][coin.col] == None):
-                        empty_space += 1
-                    else:
-                        c = self.grid[row][coin.col]
-                        self.grid[row][coin.col] = None
-                        self.grid[(row - empty_space)][coin.col] = c
-                        c.move(row - empty_space, coin.col)
-                landing_row = 6 - empty_space
-                self.grid[landing_row][coin.col] = coin
-                coin.move(landing_row, coin.col)
+                self.pack_up(coin)
             case "RIGHT":
-                for col in range(5, -1, -1):
-                    if (self.grid[coin.row][col] == None):
-                        empty_space += 1
-                    else:
-                        c = self.grid[coin.row][col]
-                        self.grid[coin.row][col] = None
-                        self.grid[coin.row][col + empty_space] = c
-                        c.move(coin.row, col + empty_space)
-                landing_col = empty_space - 1
-                self.grid[coin.row][landing_col] = coin
-                coin.move(coin.row, landing_col)
+                self.pack_right(coin)
             case "LEFT":
-                for col in range(0, 6, 1):
-                    if (self.grid[coin.row][col] == None):
-                        empty_space += 1
-                    else:
-                        c = self.grid[coin.row][col]
-                        self.grid[coin.row][col] = None
-                        self.grid[coin.row][col - empty_space] = c
-                        c.move(coin.row, col - empty_space)
-                landing_col = 6 - empty_space
-                self.grid[coin.row][landing_col] = coin
-                coin.move(coin.row, landing_col)
-        print(self.grid)
+                self.pack_left(coin)
 
     def update(self, dt):
         self.animate(dt)
@@ -85,10 +101,6 @@ class Board:
         for coin in self.coins:
             coin.update()
         self.updated = True
-
-    def add_coin(self, coin, row, col):
-        self.coins.append(coin)
-        self.updated = False
     
     """Returns the true if a row or column is full, depending on direction"""
     def is_full(self, row, col, direction):
