@@ -10,6 +10,7 @@ from input import Input
 pygame.init()
 pygame.mixer.init()
 pygame.display.set_caption('4WayConnect4')
+pygame.mouse.set_visible(False)
 screen_width = 480
 screen_height = 270
 screen = pygame.display.set_mode((screen_width, screen_height), pygame.SCALED)
@@ -32,7 +33,7 @@ board_spritesheet = pygame.image.load(resource_path('game/sprites/board-sheet.pn
 
 #main game loop
 board = Board(132, 27, board_spritesheet, screen)
-input = Input(greencoin_img, screen, board)
+input = Input([greencoin_img, redcoin_img], screen, board)
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
