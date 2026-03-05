@@ -1,6 +1,6 @@
 import sys
 import os
-
+scalar = 1
 def resource_path(relative_path):
     """" Get absolute path to resource, this is in case of converting to exe with PyInstaller """
     try:

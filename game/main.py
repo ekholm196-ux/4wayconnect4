@@ -32,7 +32,7 @@ board_spritesheet = pygame.image.load(resource_path('game/sprites/board-sheet.pn
 
 #main game loop
 board = Board(132, 27, board_spritesheet, screen)
-input = Input(greencoin_img, screen)
+input = Input(greencoin_img, screen, board)
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
