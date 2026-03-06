@@ -22,3 +22,4 @@ class Coin:
 
     def update(self):
         self.draw()
+    
