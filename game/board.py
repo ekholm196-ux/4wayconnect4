@@ -15,20 +15,21 @@ class Board:
         self.score = [0, 0]
         self.grid = [[None] * 6 for _ in range(6)]
 
+    #handles the animation of board, by changing the image after a certain time, using delta time between frames
     def animate(self, dt):
         self.animation_time += dt
         if self.animation_time >= 200:
             self.index = (self.index + 1) % 7
             self.animation_time = 0
 
+    #draws the board from a sprite sheet, iterating a window/frame over the 7 frames
     def draw(self):
         frame_width = self.image.get_width() / 7
         frame_height = self.image.get_height()
         frame_rect = pygame.Rect(self.index * frame_width, 0, frame_width, frame_height)
         self.screen.blit(self.image, (self.x ,self.y), frame_rect)
-    """
-    The packing functions pack the coins in one direction, and then places the new coin at the end. 
-    """
+
+    #The packing functions pack the coins in one direction, and then places the new coin at the end. 
     def pack_down(self, coin):
         empty_space = 0
         for row in range(5, -1, -1):
@@ -84,9 +85,8 @@ class Board:
         landing_col = 6 - empty_space
         self.grid[coin.row][landing_col] = coin
         coin.move(coin.row, landing_col)
-    """
-    Adds a new coing to the board and packs coins in the right direction. And after a new move has been made the board checks for 4 in a row
-    """
+
+    #Adds a new coing to the board and packs coins in the right direction. And after a new move has been made the board checks for 4 in a row.
     def add_coin(self, coin, direction):
         self.coins.append(coin)
         match direction:
@@ -100,16 +100,15 @@ class Board:
                 self.pack_left(coin)
         self.check_game_over()
 
+    #Updates things that needs updated every frame, like the coins in play, the boards animation, and draws itself.
     def update(self, dt):
         self.animate(dt)
         self.draw()
         for coin in self.coins:
             coin.update()
 
-    
-    """
-    Returns the true if a row or column is full, depending on direction
-    """
+
+    #Returns the true if a row or column is full, depending on direction you want to play in. I.e if you mean the row or col.
     def is_full(self, row, col, direction):
         if (direction == "UP" or direction == "DOWN"):
                 return all(row[col] is not None for row in self.grid)
@@ -117,6 +116,7 @@ class Board:
         else:
             return all(self.grid[row])
         
+    #Checks if there is 4 coins connected in rows    
     def check_rows(self):
         previous = None
         count = 1
@@ -133,6 +133,7 @@ class Board:
                     self.score[coin.team] += 1
                     count = 1
    
+    #Checks if there are 4 coins connected in columns.
     def check_cols(self):
         previous = None
         count = 1
@@ -150,6 +151,9 @@ class Board:
                     self.score[coin.team] += 1
                     count = 1
     
+    """
+    Checks if there are 4 coins connected in diagonals. But only checks diagonals where the length is long enough to hold 4 coins.
+    """
     def check_diagonals(self):
         n = 6
         m = 6

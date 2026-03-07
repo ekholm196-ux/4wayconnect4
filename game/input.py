@@ -35,15 +35,17 @@ class Input:
                     coordinates = (self.screen.get_width() - 135*scalar - self.image.get_width(), 68*scalar + 24*scalar*row)
                     self.placement_points.append(((pygame.Rect(coordinates, (self.image.get_width(), self.image.get_height()))), row, col, "LEFT"))
 
-
+    #draws a coin over the cursor location
     def draw(self, x, y):
         if (self.image != None):
             self.screen.blit(self.image, (x, y))
 
+    #updates things that should be updates every frame
     def update(self):
         self.placement()
         self.draw(self.x, self.y)
     
+    #Finds the mouse position, snaps onto placement points if collding with them, and allows you to place a coin if the row/col is not full.
     def placement(self):
         self.x, self.y = pygame.mouse.get_pos()
         self.x -= self.width/2

@@ -13,7 +13,7 @@ pygame.display.set_caption('4WayConnect4')
 pygame.mouse.set_visible(False)
 screen_width = 480
 screen_height = 270
-screen = pygame.display.set_mode((screen_width, screen_height), pygame.SCALED)
+screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
 gameClock = pygame.time.Clock()
 font = pygame.font.SysFont("consolas", 24)
 
