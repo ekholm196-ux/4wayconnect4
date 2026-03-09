@@ -1,5 +1,5 @@
 import pygame
-from utility import scalar, resource_path
+from utility import resource_path
 from coin import Coin
 import time
 
@@ -17,22 +17,22 @@ class Input:
         self.placement_points = []
 
         """
-        Making the placement points for coins, using rectangles so that collision with the cursor can be checked,
-        using scalar. They are stored in a list, as tuples, so that each rectangle has a correspongding row, column and direction of travel.
+        Making the placement points for coins, using rectangles so that collision with the cursor can be checked.
+        They are stored in a list, as tuples, so that each rectangle has a correspongding row, column and direction of travel.
         """
         for row in range(0, 6, 1):
             for col in range(0, 6, 1):
                 if (row == 0):
-                    coordinates = (173*scalar + 24*scalar*col, 30*scalar)
+                    coordinates = (173 + 24*col, 30)
                     self.placement_points.append(((pygame.Rect(coordinates, (self.image.get_width(), self.image.get_height()))), row, col, "DOWN"))
                 elif (row == 5):
-                    coordinates = (173*scalar +24*scalar*col, self.screen.get_height() - 30*scalar - self.image.get_height())
+                    coordinates = (173 +24*col, self.screen.get_height() - 30 - self.image.get_height())
                     self.placement_points.append(((pygame.Rect(coordinates, (self.image.get_width(), self.image.get_height()))), row, col, "UP"))
                 if (col == 0):
-                    coordinates = (135*scalar, 68*scalar + 24*scalar*row)
+                    coordinates = (135, 68 + 24*row)
                     self.placement_points.append(((pygame.Rect(coordinates, (self.image.get_width(), self.image.get_height()))), row, col, "RIGHT"))
                 elif (col == 5):
-                    coordinates = (self.screen.get_width() - 135*scalar - self.image.get_width(), 68*scalar + 24*scalar*row)
+                    coordinates = (self.screen.get_width() - 135 - self.image.get_width(), 68 + 24*row)
                     self.placement_points.append(((pygame.Rect(coordinates, (self.image.get_width(), self.image.get_height()))), row, col, "LEFT"))
 
     #draws a coin over the cursor location
