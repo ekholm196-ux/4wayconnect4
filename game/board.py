@@ -88,6 +88,7 @@ class Board:
 
     #Adds a new coing to the board and packs coins in the right direction. And after a new move has been made the board checks for 4 in a row.
     def add_coin(self, coin, direction):
+        self.updated = False
         self.coins.append(coin)
         match direction:
             case "DOWN":
@@ -104,8 +105,11 @@ class Board:
     def update(self, dt):
         self.animate(dt)
         self.draw()
+        self.updated = True
         for coin in self.coins:
-            coin.update()
+            coin.update(dt)
+            if not coin.animation_ended:
+                self.updated = False
 
 
     #Returns the true if a row or column is full, depending on direction you want to play in. I.e if you mean the row or col.

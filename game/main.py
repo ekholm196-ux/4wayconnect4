@@ -1,3 +1,4 @@
+
 import pygame
 import os
 import sys
@@ -15,8 +16,8 @@ screen_width = 480
 screen_height = 270
 screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
 gameClock = pygame.time.Clock()
+gameClock.tick(60)
 font = pygame.font.SysFont("consolas", 24)
-
 #gameloop booleans
 running = True
 match_in_progress = False
@@ -35,6 +36,7 @@ board_spritesheet = pygame.image.load(resource_path('game/sprites/board-sheet.pn
 board = Board(132, 27, board_spritesheet, screen)
 input = Input([greencoin_img, redcoin_img], screen, board)
 while running:
+    gameClock.tick()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -52,7 +54,5 @@ while running:
     now = time.time()
     dt = (now - last_time) * 1000
     last_time = now
-
-    gameClock.tick()
 
 pygame.quit()      

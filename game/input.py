@@ -15,6 +15,7 @@ class Input:
         self.height = self.image.get_height()
         self.board = board
         self.placement_points = []
+        self.open = True
 
         """
         Making the placement points for coins, using rectangles so that collision with the cursor can be checked.
@@ -51,12 +52,11 @@ class Input:
         self.x -= self.width/2
         self.y -= self.height/2
         for placement in self.placement_points:
-            if (placement[0].collidepoint((pygame.mouse.get_pos())) and self.board.updated):
+            if (self.board.updated and placement[0].collidepoint((pygame.mouse.get_pos()))):
                 self.x = placement[0].x
                 self.y = placement[0].y
                 if (pygame.mouse.get_pressed()[0] and self.board.is_full(placement[1], placement[2], placement[3]) == False):
-                    coin = Coin(self.screen, self.image, placement[1], placement[2], (placement[0].x, placement[0].y), self.team, self.board)
+                    coin = Coin(self.screen, self.image, placement[1], placement[2], (placement[0].x, placement[0].y), self.team, self.board, placement[3])
                     self.board.add_coin(coin, placement[3])
                     self.team = (self.team + 1) % 2
                     self.image = self.images[self.team]
-                    time.sleep(0.1)

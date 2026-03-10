@@ -1,6 +1,6 @@
 import sys
 import os
-scalar = 1
+import pygame
 def resource_path(relative_path):
     """" Get absolute path to resource, this is in case of converting to exe with PyInstaller """
     try:
@@ -10,3 +10,5 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
+
+layers = pygame.sprite.LayeredUpdates()
