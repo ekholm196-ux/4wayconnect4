@@ -30,10 +30,11 @@ last_time = time.time()
 redcoin_img = pygame.image.load(resource_path('game/sprites/redcoin-sheet.png')).convert_alpha()
 greencoin_img = pygame.image.load(resource_path('game/sprites/greencoin-sheet.png')).convert_alpha()
 board_spritesheet = pygame.image.load(resource_path('game/sprites/board-sheet.png')).convert_alpha()
-
+grid_img = pygame.image.load(resource_path('game/sprites/grid-sheet.png')).convert_alpha()
+board_sprites = [board_spritesheet, grid_img]
 
 #main game loop
-board = Board(132, 27, board_spritesheet, screen)
+board = Board(132, 27, board_sprites, screen)
 input = Input([greencoin_img, redcoin_img], screen, board)
 while running:
     gameClock.tick()

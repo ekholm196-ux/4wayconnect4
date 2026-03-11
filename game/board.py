@@ -2,12 +2,12 @@ import pygame
 import time
 
 class Board:
-    def __init__(self, x, y, sprite : dict, screen):
+    def __init__(self, x, y, sprites, screen):
         self.x = x
         self.y = y
-        self.sprite = sprite
         self.screen = screen
-        self.image = self.sprite
+        self.image = sprites[0]
+        self.grid_image = sprites[1]
         self.animation_time = 0
         self.index = 0
         self.coins = []
@@ -28,6 +28,10 @@ class Board:
         frame_height = self.image.get_height()
         frame_rect = pygame.Rect(self.index * frame_width, 0, frame_width, frame_height)
         self.screen.blit(self.image, (self.x ,self.y), frame_rect)
+    
+        #draws the grid, over the coins.
+    def draw_grid(self):
+        self.screen.blit(self.grid_image, (self.x ,self.y))
 
     #The packing functions pack the coins in one direction, and then places the new coin at the end. 
     def pack_down(self, coin):
@@ -110,6 +114,7 @@ class Board:
             coin.update(dt)
             if not coin.animation_ended:
                 self.updated = False
+        self.draw_grid()
 
 
     #Returns the true if a row or column is full, depending on direction you want to play in. I.e if you mean the row or col.
@@ -209,3 +214,4 @@ class Board:
             print("Green wins!")
         elif(self.score[1] > self.score[0]):
             print("Red wins!")
+    
