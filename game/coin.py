@@ -15,7 +15,12 @@ class Coin:
         self.rect.x = destination[0]
         self.rect.y = destination[1]
         self.animation_ended = False
-        self.collision_count = 0
+        """
+        This variable is for the animation to be played if this is the coin being played and it collies, so we get a visual effect only 
+        the played coin collides.
+        """
+        self.played = True 
+
 
         #initial momentum when coin is played
         self.momentum_x = 0
@@ -74,7 +79,6 @@ class Coin:
 
         neighbour_coin = self.board.grid[check_row][check_col]
         if neighbour_coin and self.rect.colliderect(neighbour_coin.rect) and not neighbour_coin.momentum_y and not neighbour_coin.momentum_x:
-            self.collision_count += 1
             neighbour_coin.momentum_y = self.momentum_y
             neighbour_coin.momentum_x = self.momentum_x
             self.momentum_y /= 2
