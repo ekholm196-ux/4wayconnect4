@@ -1,4 +1,5 @@
 import pygame
+from particle import Particle
 
 class Coin:
     def __init__(self, screen, image, row, column, destination, team, board, direction):
@@ -19,7 +20,7 @@ class Coin:
         This variable is for the animation to be played if this is the coin being played and it collies, so we get a visual effect only 
         the played coin collides.
         """
-        self.played = True 
+        self.being_played = True 
 
 
         #initial momentum when coin is played
@@ -79,6 +80,10 @@ class Coin:
 
         neighbour_coin = self.board.grid[check_row][check_col]
         if neighbour_coin and self.rect.colliderect(neighbour_coin.rect) and not neighbour_coin.momentum_y and not neighbour_coin.momentum_x:
+            if self.being_played:
+                #for x in range(60):
+                    #particle = Particle(self.rect.x + 8, self.rect.y + 14, self.momentum_x, self.momentum_y, self.screen)
+                #self.being_played = False
             neighbour_coin.momentum_y = self.momentum_y
             neighbour_coin.momentum_x = self.momentum_x
             self.momentum_y /= 2

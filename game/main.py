@@ -3,7 +3,7 @@ import pygame
 import os
 import sys
 import time
-from utility import resource_path
+from utility import resource_path, particles
 from board import Board
 from input import Input
 
@@ -16,7 +16,7 @@ screen_width = 480
 screen_height = 270
 screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
 gameClock = pygame.time.Clock()
-gameClock.tick(60)
+#gameClock.tick(60)
 font = pygame.font.SysFont("consolas", 24)
 #gameloop booleans
 running = True
@@ -37,7 +37,7 @@ board_sprites = [board_spritesheet, grid_img]
 board = Board(132, 27, board_sprites, screen)
 input = Input([greencoin_img, redcoin_img], screen, board)
 while running:
-    gameClock.tick()
+    #gameClock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -49,11 +49,11 @@ while running:
     fps_text = font.render(f"FPS: {fps:.0f}", True, (255, 255, 255))
     screen.blit(fps_text, (10, 10))
     board.update(dt)
+    particles.update(dt)
     input.update()
     pygame.display.flip()
 
     now = time.time()
     dt = (now - last_time) * 1000
     last_time = now
-
 pygame.quit()      
