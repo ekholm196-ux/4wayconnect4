@@ -26,17 +26,19 @@ class Coin:
         #initial momentum when coin is played
         self.momentum_x = 0
         self.momentum_y = 0
-        self.directions = (0, 0)
         match direction:
             case "UP": 
                 self.momentum_y = -0.5
+                self.collision_point = [7, 0]
             case "DOWN":
                 self.momentum_y = 0.5
+                self.collision_point = [7, 14]
             case "RIGHT":
                 self.momentum_x = 0.5
+                self.collision_point = [14, 7]
             case "LEFT":
                 self.momentum_x = -0.5
-
+                self.collision_point = [0, 7]
 
     #moves the coin to a new row and column, not on the board but for knowing where to draw
 
@@ -87,9 +89,9 @@ class Coin:
         neighbour_coin = self.board.grid[check_row][check_col]
         if neighbour_coin and self.rect.colliderect(neighbour_coin.rect) and not neighbour_coin.momentum_y and not neighbour_coin.momentum_x:
             if self.being_played:
-                for x in range(60):
-                    particle = Particle(self.rect.x + 8, self.rect.y + 14, self.momentum_x, self.momentum_y, self.screen)
-                self.being_played = False
+                x = self.rect.x 
+                for i in range(60):
+                    particle = Particle(self.rect.x + self.collision_point[0], self.rect.y + self.collision_point[1], self.screen)
             neighbour_coin.momentum_y = self.momentum_y
             neighbour_coin.momentum_x = self.momentum_x
             self.momentum_y /= 2
