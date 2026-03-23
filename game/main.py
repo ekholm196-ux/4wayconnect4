@@ -37,7 +37,7 @@ board_sprites = [board_spritesheet, grid_img]
 board = Board(132, 27, board_sprites, screen)
 input = Input([greencoin_img, redcoin_img], screen, board)
 while running:
-    #gameClock.tick(60)
+    gameClock.tick()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False

@@ -18,10 +18,10 @@ class Coin:
         self.animation_ended = False
         """
         This variable is for the animation to be played if this is the coin being played and it collies, so we get a visual effect only 
-        the played coin collides.
+        the played coin collides. It is briefly true in the add_coin function in board to allow the coin being played to trigger a 
+        particle effect upon collision.
         """
-        self.being_played = True 
-
+        self.being_played = True
 
         #initial momentum when coin is played
         self.momentum_x = 0
@@ -46,6 +46,11 @@ class Coin:
         self.distance_desired_x = abs(self.rect.x - (173 + self.col * 24))
         self.distance_desired_y = abs(self.rect.y - (68  + self.row * 24))
 
+    """
+    This function moves the sprite of the coin to the board position of the coin if they are not aligned, based off of the coins own 
+    momentum. It also importantly sets the being_played attribute to False, since when a coin stops for the first time it means it 
+    can no longer be the coin being in play, thus we do not want to initiate the particle effect if it collides.
+    """
     def animate(self, dt):
         self.float_x += self.momentum_x*dt
         self.float_y += self.momentum_y*dt
@@ -60,6 +65,7 @@ class Coin:
             self.rect.y = 68  + self.row * 24
             self.float_x = self.rect.x
             self.float_y = self.rect.y
+            self.being_played = False
             self.animation_ended = True
         if (self.momentum_x or self.momentum_y):
             self.check_collision()
@@ -81,9 +87,9 @@ class Coin:
         neighbour_coin = self.board.grid[check_row][check_col]
         if neighbour_coin and self.rect.colliderect(neighbour_coin.rect) and not neighbour_coin.momentum_y and not neighbour_coin.momentum_x:
             if self.being_played:
-                #for x in range(60):
-                    #particle = Particle(self.rect.x + 8, self.rect.y + 14, self.momentum_x, self.momentum_y, self.screen)
-                #self.being_played = False
+                for x in range(60):
+                    particle = Particle(self.rect.x + 8, self.rect.y + 14, self.momentum_x, self.momentum_y, self.screen)
+                self.being_played = False
             neighbour_coin.momentum_y = self.momentum_y
             neighbour_coin.momentum_x = self.momentum_x
             self.momentum_y /= 2

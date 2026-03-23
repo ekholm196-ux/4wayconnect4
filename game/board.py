@@ -92,7 +92,7 @@ class Board:
 
     #Adds a new coing to the board and packs coins in the right direction. And after a new move has been made the board checks for 4 in a row.
     def add_coin(self, coin, direction):
-        self.updated = False
+        self.updated = True
         self.coins.append(coin)
         match direction:
             case "DOWN":

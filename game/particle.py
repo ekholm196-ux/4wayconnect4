@@ -15,8 +15,7 @@ class Particle(pygame.sprite.Sprite):
         based on the direction of the coin whom creates said collision particle effect, decide which direction(opposite) this particle 
         should travel, as well as a random angle in the other axis.
         """
-        self.lifetime = 0
-        self.lifetime_limit = random.randint(240, 320)
+        self.animation_time = 0
         self.angle = math.radians(random.randint(0, 360))
         if momentum_y:
             self.momentum_tot = -momentum_y/10
@@ -31,13 +30,12 @@ class Particle(pygame.sprite.Sprite):
         
     #moves/animates the particle
     def animate(self, dt):
-        self.lifetime += 1
+        self.animation_time += 1
         self.float_x += self.momentum_x*dt
         self.float_y += self.momentum_y*dt
         self.rect.x = self.float_x
         self.rect.y = self.float_y
-        print(self.float_x, self.float_y, self.momentum_x, self.momentum_y)
-        if self.lifetime > self.lifetime_limit:
+        if self.animation_time > 100:
             self.kill()
 
     #draws the particle
