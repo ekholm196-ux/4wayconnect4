@@ -3,9 +3,9 @@ import pygame
 import os
 import sys
 import time
-from utility import resource_path, particles
 from board import Board
 from input import Input
+from utility import screen, resource_path, particles
 
 #Setting up pygame
 pygame.init()
@@ -26,16 +26,9 @@ match_in_progress = False
 dt = 0
 last_time = time.time()
 
-#loading sprites
-redcoin_img = pygame.image.load(resource_path('game/sprites/redcoin-sheet.png')).convert_alpha()
-greencoin_img = pygame.image.load(resource_path('game/sprites/greencoin-sheet.png')).convert_alpha()
-board_spritesheet = pygame.image.load(resource_path('game/sprites/board-sheet.png')).convert_alpha()
-grid_img = pygame.image.load(resource_path('game/sprites/grid-sheet.png')).convert_alpha()
-board_sprites = [board_spritesheet, grid_img]
-
 #main game loop
-board = Board(132, 27, board_sprites, screen)
-input = Input([greencoin_img, redcoin_img], screen, board)
+board = Board(132, 27)
+input = Input(board)
 while running:
     gameClock.tick()
     for event in pygame.event.get():

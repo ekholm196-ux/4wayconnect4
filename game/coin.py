@@ -1,4 +1,5 @@
 import pygame
+from utility import collision_sound
 from particle import Particle
 
 class Coin:
@@ -9,6 +10,7 @@ class Coin:
         self.board = board
         self.destination = destination
         self.screen = screen
+        self.sound = collision_sound
         self.image = image        
         self.rect = self.image.get_rect()
         self.float_x = destination[0]
@@ -90,6 +92,7 @@ class Coin:
         if neighbour_coin and self.rect.colliderect(neighbour_coin.rect) and not neighbour_coin.momentum_y and not neighbour_coin.momentum_x:
             if self.being_played:
                 x = self.rect.x 
+                pygame.mixer.Sound.play(collision_sound)
                 for i in range(60):
                     particle = Particle(self.rect.x + self.collision_point[0], self.rect.y + self.collision_point[1], self.screen)
             neighbour_coin.momentum_y = self.momentum_y

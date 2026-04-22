@@ -1,16 +1,17 @@
 import pygame
-from utility import resource_path
+from utility import resource_path, play_sound, screen, greencoin_img, redcoin_img
 from coin import Coin
 import time
 
 class Input:
-    def __init__(self, images, screen, board):
+    def __init__(self, board):
         self.team = 0
-        self.images = images
+        self.images = [greencoin_img, redcoin_img]
         self.image = self.images[self.team]
         self.screen = screen
         self.x = 0
         self.y = 0
+        self.sound = play_sound
         self.width = self.image.get_width()
         self.height = self.image.get_height()
         self.board = board
@@ -58,5 +59,6 @@ class Input:
                 if (pygame.mouse.get_pressed()[0] and self.board.is_full(placement[1], placement[2], placement[3]) == False):
                     coin = Coin(self.screen, self.image, placement[1], placement[2], (placement[0].x, placement[0].y), self.team, self.board, placement[3])
                     self.board.add_coin(coin, placement[3])
+                    pygame.mixer.Sound.play(self.sound)
                     self.team = (self.team + 1) % 2
                     self.image = self.images[self.team]

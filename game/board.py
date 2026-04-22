@@ -1,13 +1,14 @@
 import pygame
 import time
+from utility import board_spritesheet, grid_img, screen
 
 class Board:
-    def __init__(self, x, y, sprites, screen):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
         self.screen = screen
-        self.image = sprites[0]
-        self.grid_image = sprites[1]
+        self.image = board_spritesheet
+        self.grid_image = grid_img
         self.animation_time = 0
         self.index = 0
         self.coins = []
