@@ -21,8 +21,6 @@ screen_width = 480
 screen_height = 270
 screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
 gameClock = pygame.time.Clock()
-#gameClock.tick(60)
-font = pygame.font.SysFont("consolas", 24)
 
 layers = pygame.sprite.LayeredUpdates()
 particles = pygame.sprite.Group()

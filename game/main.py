@@ -16,7 +16,7 @@ screen_width = 480
 screen_height = 270
 screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
 gameClock = pygame.time.Clock()
-font = pygame.font.Font(resource_path('fonts/ARCADECLASSIC.TTF'), 16)
+font = pygame.font.Font(resource_path('game/fonts/ARCADECLASSIC.TTF'), 16)
 #gameloop booleans
 running = True
 match_in_progress = False
