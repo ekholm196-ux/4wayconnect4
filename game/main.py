@@ -16,7 +16,6 @@ screen_width = 480
 screen_height = 270
 screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
 gameClock = pygame.time.Clock()
-#gameClock.tick(60)
 font = pygame.font.Font(resource_path('fonts/ARCADECLASSIC.TTF'), 16)
 #gameloop booleans
 running = True
@@ -36,16 +35,14 @@ while running:
             running = False
 
     screen.fill((30, 30, 30))
-
     #FPS-text
     fps = gameClock.get_fps()
-    fps_text = font.render(f"FPS {fps:.0f}", False, (0, 200, 255))
+    fps_text = font.render(f"FPS {fps:.0f}", False, (98, 190, 196))
     screen.blit(fps_text, (10, 10))
     board.update(dt)
     particles.update(dt)
     input.update()
     pygame.display.flip()
-
     now = time.time()
     dt = (now - last_time) * 1000
     last_time = now

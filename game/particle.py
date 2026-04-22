@@ -19,12 +19,12 @@ class Particle(pygame.sprite.Sprite):
         
     #moves/animates the particle
     def animate(self, dt):
-        self.animation_time += 1
+        self.animation_time += dt
         self.float_x += self.momentum_x*dt
         self.float_y += self.momentum_y*dt
         self.rect.x = self.float_x
         self.rect.y = self.float_y
-        if self.animation_time > 100:
+        if self.animation_time > 400:
             self.kill()
 
     #draws the particle
