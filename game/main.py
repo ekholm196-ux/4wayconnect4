@@ -17,7 +17,7 @@ screen_height = 270
 screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
 gameClock = pygame.time.Clock()
 #gameClock.tick(60)
-font = pygame.font.SysFont("consolas", 24)
+font = pygame.font.Font(resource_path('fonts/ARCADECLASSIC.TTF'), 16)
 #gameloop booleans
 running = True
 match_in_progress = False
@@ -39,7 +39,7 @@ while running:
 
     #FPS-text
     fps = gameClock.get_fps()
-    fps_text = font.render(f"FPS: {fps:.0f}", True, (255, 255, 255))
+    fps_text = font.render(f"FPS {fps:.0f}", False, (0, 200, 255))
     screen.blit(fps_text, (10, 10))
     board.update(dt)
     particles.update(dt)
