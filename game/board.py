@@ -131,9 +131,12 @@ class Board:
         previous = None
         count = 1
         for row in self.grid:
+            previous = None
+            count = 1
             for coin in row:
                 if (coin is None):
                     previous = None
+                    count = 1
                 elif (coin.team == previous):
                     count += 1
                 else:
@@ -148,10 +151,13 @@ class Board:
         previous = None
         count = 1
         for column in range(0, 6, 1):
+            previous = None
+            count = 1
             for tile in range(0, 6, 1):
                 coin = self.grid[tile][column]
                 if (coin is None):
                     previous = None
+                    count = 1
                 elif (coin.team == previous):
                     count += 1
                 else:
@@ -172,12 +178,15 @@ class Board:
         for line in range(4, 9):
             start_column = max(0, line - n)
             nbr_elements = min(line, m - start_column, n)
+            previous = None
+            count = 1
             for j in range(nbr_elements):
                 row = min(n, line) - j - 1
                 col = start_column + j
                 coin = self.grid[row][col]
                 if (coin == None):
                     previous = None
+                    count = 1
                 elif (coin.team == previous):
                     count += 1
                 else:
@@ -192,12 +201,15 @@ class Board:
         for line in range(4, 9):
             start_column =(n-1) + min(0, line - n, n - line)
             nbr_elements = min(line, start_column + 1, n)
+            previous = None
+            count = 1
             for j in range(nbr_elements):
                 row = min(n, line) - j - 1
                 col = start_column - j
                 coin = self.grid[row][col]
                 if (coin == None):
                     previous = None
+                    count = 1
                 elif (coin.team == previous):
                     count += 1
                 else:
