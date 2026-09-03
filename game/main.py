@@ -26,10 +26,10 @@ dt = 0
 last_time = time.time()
 
 #main game loop
-board = Board(132, 27)
+board = Board()
 input = Input(board)
 while running:
-    gameClock.tick()
+    gameClock.tick(60)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False

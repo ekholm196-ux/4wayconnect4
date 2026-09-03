@@ -3,9 +3,7 @@ import time
 from utility import board_spritesheet, grid_img, screen
 
 class Board:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+    def __init__(self):
         self.screen = screen
         self.image = board_spritesheet
         self.grid_image = grid_img
@@ -19,20 +17,20 @@ class Board:
     #handles the animation of board, by changing the image after a certain time, using delta time between frames
     def animate(self, dt):
         self.animation_time += dt
-        if self.animation_time >= 200:
-            self.index = (self.index + 1) % 7
+        if self.animation_time >= 100:
+            self.index = (self.index + 1) % 14
             self.animation_time = 0
 
     #draws the board from a sprite sheet, iterating a window/frame over the 7 frames
     def draw(self):
-        frame_width = self.image.get_width() / 7
+        frame_width = self.image.get_width() / 14
         frame_height = self.image.get_height()
         frame_rect = pygame.Rect(self.index * frame_width, 0, frame_width, frame_height)
-        self.screen.blit(self.image, (self.x ,self.y), frame_rect)
+        self.screen.blit(self.image, (0 ,0), frame_rect)
     
         #draws the grid, over the coins.
     def draw_grid(self):
-        self.screen.blit(self.grid_image, (self.x ,self.y))
+        self.screen.blit(self.grid_image, ((screen.get_width() - self.grid_image.get_width()) / 2, (screen.get_height() - self.grid_image.get_width()) / 2))
 
     #The packing functions pack the coins in one direction, and then places the new coin at the end. 
     def pack_down(self, coin):
