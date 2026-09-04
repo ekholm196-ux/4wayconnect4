@@ -19,7 +19,7 @@ pygame.display.set_caption('4WayConnect4')
 pygame.mouse.set_visible(False)
 screen_width = 480
 screen_height = 270
-screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
+screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED | pygame.RESIZABLE)
 gameClock = pygame.time.Clock()
 state = 'GAME'
 layers = pygame.sprite.LayeredUpdates()

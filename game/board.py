@@ -14,6 +14,8 @@ class Board:
         self.score = [0, 0]
         self.grid = [[None] * 6 for _ in range(6)]
         self.win = win
+        self.winner = None
+        self.game_over = False
 
     #handles the animation of board, by changing the image after a certain time, using delta time between frames
     def animate(self, dt):
@@ -115,6 +117,13 @@ class Board:
             if not coin.animation_ended:
                 self.updated = False
         self.draw_grid()
+        if self.winner is not None and self.updated:
+            pygame.mixer.Sound.play(win_sound)
+            self.win.set_winner(self.winner)
+            self.winner = None
+            for score in self.score:
+                score = 0
+            set_state('END')
 
 
     #Returns the true if a row or column is full, depending on direction you want to play in. I.e if you mean the row or col.
@@ -222,9 +231,8 @@ class Board:
         self.check_rows()
         self.check_cols()
         self.check_diagonals()
-        for i in self.score:
-            if self.score[i] > 0:
-                pygame.mixer.Sound.play(win_sound)
-                self.win.set_winner(i)
-                set_state('END')
-    
+        if self.score[0] > self.score[1]:
+            self.winner = 0
+
+        elif self.score[1] > self.score[0]:
+            self.winner = 1
