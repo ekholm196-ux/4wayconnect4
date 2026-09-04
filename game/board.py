@@ -1,9 +1,9 @@
 import pygame
 import time
-from utility import board_spritesheet, grid_img, screen
+from utility import board_spritesheet, grid_img, screen, win_sound, greenwin_img, redwin_img, set_state
 
 class Board:
-    def __init__(self):
+    def __init__(self, win):
         self.screen = screen
         self.image = board_spritesheet
         self.grid_image = grid_img
@@ -13,6 +13,7 @@ class Board:
         self.updated = True
         self.score = [0, 0]
         self.grid = [[None] * 6 for _ in range(6)]
+        self.win = win
 
     #handles the animation of board, by changing the image after a certain time, using delta time between frames
     def animate(self, dt):
@@ -221,8 +222,9 @@ class Board:
         self.check_rows()
         self.check_cols()
         self.check_diagonals()
-        if (self.score[0] > self.score[1]):
-            print("Green wins!")
-        elif(self.score[1] > self.score[0]):
-            print("Red wins!")
+        for i in self.score:
+            if self.score[i] > 0:
+                pygame.mixer.Sound.play(win_sound)
+                self.win.set_winner(i)
+                set_state('END')
     

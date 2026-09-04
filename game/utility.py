@@ -21,16 +21,27 @@ screen_width = 480
 screen_height = 270
 screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED)
 gameClock = pygame.time.Clock()
-
+state = 'GAME'
 layers = pygame.sprite.LayeredUpdates()
 particles = pygame.sprite.Group()
 
+def set_state(new_state):
+    global state
+    state = new_state
+
+def get_state():
+    global state
+    return state
 #load all sounds and images
 redcoin_img = pygame.image.load(resource_path('game/sprites/redcoin-sheet.png')).convert_alpha()
 greencoin_img = pygame.image.load(resource_path('game/sprites/greencoin-sheet.png')).convert_alpha()
 board_spritesheet = pygame.image.load(resource_path('game/sprites/board-sheet.png')).convert_alpha()
 grid_img = pygame.image.load(resource_path('game/sprites/grid-sheet.png')).convert_alpha()
+greenwin_img = pygame.image.load(resource_path('game/sprites/greenwins.png')).convert_alpha()
+redwin_img = pygame.image.load(resource_path('game/sprites/redwins.png')).convert_alpha()
 play_sound = pygame.mixer.Sound(resource_path('game/sounds/play_coin.wav'))
 collision_sound = pygame.mixer.Sound(resource_path('game/sounds/collision.wav'))
 play_sound.set_volume(0.1)
 collision_sound.set_volume(0.05)
+win_sound = pygame.mixer.Sound(resource_path('game/sounds/winsound.wav'))
+win_sound.set_volume(0.1)

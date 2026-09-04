@@ -5,7 +5,8 @@ import sys
 import time
 from board import Board
 from input import Input
-from utility import screen, resource_path, particles
+from win import Win
+from utility import screen, resource_path, particles, get_state
 
 #Setting up pygame
 pygame.init()
@@ -26,22 +27,27 @@ dt = 0
 last_time = time.time()
 
 #main game loop
-board = Board()
+win = Win()
+board = Board(win)
 input = Input(board)
 while running:
-    gameClock.tick(60)
+    gameClock.tick(280)
+    state = get_state()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+    if state == 'MENU':
+        pass
 
-    screen.fill((30, 30, 30))
-    #FPS-text
-    fps = gameClock.get_fps()
-    fps_text = font.render(f"FPS {fps:.0f}", False, (98, 190, 196))
-    screen.blit(fps_text, (10, 10))
-    board.update(dt)
-    particles.update(dt)
-    input.update()
+    elif state == 'GAME':
+        board.update(dt)
+        particles.update(dt)
+        input.update()
+
+    elif state == 'END':
+        win.update(dt)
+        particles.update(dt)
+        
     pygame.display.flip()
     now = time.time()
     dt = (now - last_time) * 1000

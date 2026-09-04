@@ -1,6 +1,7 @@
 import pygame
-from utility import collision_sound
+from utility import collision_sound, screen
 from particle import Particle
+import random
 
 class Coin:
     def __init__(self, screen, image, row, column, destination, team, board, direction):
@@ -9,7 +10,6 @@ class Coin:
         self.team = team
         self.board = board
         self.destination = destination
-        self.screen = screen
         self.sound = collision_sound
         self.image = image        
         self.rect = self.image.get_rect()
@@ -76,7 +76,7 @@ class Coin:
 
     #Draws coin at the desired place
     def draw(self):
-        self.screen.blit(self.image, self.rect)
+        screen.blit(self.image, self.rect)
     
     #checks for the incoming collision of any coin this coin will push
     def check_collision(self):
@@ -94,7 +94,7 @@ class Coin:
                 x = self.rect.x 
                 pygame.mixer.Sound.play(collision_sound)
                 for i in range(60):
-                    particle = Particle(self.rect.x + self.collision_point[0], self.rect.y + self.collision_point[1], self.screen)
+                    particle = Particle(self.rect.x + self.collision_point[0], self.rect.y + self.collision_point[1], [255, random.randint(30, 210), 0], 400)
             neighbour_coin.momentum_y = self.momentum_y
             neighbour_coin.momentum_x = self.momentum_x
             self.momentum_y /= 2

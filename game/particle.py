@@ -1,12 +1,13 @@
 import pygame
 import random
 import math
-from utility import particles
+from utility import particles, screen
 
 class Particle(pygame.sprite.Sprite):
-    def __init__(self, x, y, screen):
+    def __init__(self, x, y, color, lifespan):
         pygame.sprite.Sprite.__init__(self)
-        self.screen = screen
+        self.color = color
+        self.lifespan = lifespan
         self.float_x = x
         self.float_y = y
         self.rect = pygame.Rect(self.float_x, self.float_y, 2, 2)
@@ -24,12 +25,12 @@ class Particle(pygame.sprite.Sprite):
         self.float_y += self.momentum_y*dt
         self.rect.x = self.float_x
         self.rect.y = self.float_y
-        if self.animation_time > 400:
+        if self.animation_time > self.lifespan:
             self.kill()
 
     #draws the particle
     def draw(self):
-        pygame.draw.rect(self.screen, [255, 127, 0], self.rect)
+        pygame.draw.rect(screen, self.color, self.rect)
     
     #updates the particle for each frame
     def update(self, dt):
