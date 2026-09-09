@@ -121,8 +121,7 @@ class Board:
             pygame.mixer.Sound.play(win_sound)
             self.win.set_winner(self.winner)
             self.winner = None
-            for score in self.score:
-                score = 0
+            self.score = [0, 0]
             set_state('END')
 
 

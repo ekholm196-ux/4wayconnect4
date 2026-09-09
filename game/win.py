@@ -1,4 +1,4 @@
-from utility import state, redwin_img, greenwin_img, screen, set_state, collision_sound
+from utility import state, redwin_img, greenwin_img, screen, set_state, explosion_sound
 from particle import Particle
 import random
 import pygame
@@ -29,7 +29,7 @@ class Win:
     def fireworks(self, dt):
         self.firework_intervall += dt
         if self.firework_intervall > 500:
-            pygame.mixer.Sound.play(collision_sound)
+            pygame.mixer.Sound.play(explosion_sound)
             loc_x = random.randint(0, screen.get_width())
             loc_y = random.randint(0, screen.get_height())
             for i in range(60):

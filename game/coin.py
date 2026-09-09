@@ -94,7 +94,7 @@ class Coin:
                 x = self.rect.x 
                 pygame.mixer.Sound.play(collision_sound)
                 for i in range(60):
-                    particle = Particle(self.rect.x + self.collision_point[0], self.rect.y + self.collision_point[1], [255, random.randint(30, 210), 0], 400)
+                    particle = Particle(self.rect.x + self.collision_point[0], self.rect.y + self.collision_point[1], [255, random.randint(30, 210), 0], 300)
             neighbour_coin.momentum_y = self.momentum_y
             neighbour_coin.momentum_x = self.momentum_x
             self.momentum_y /= 2
