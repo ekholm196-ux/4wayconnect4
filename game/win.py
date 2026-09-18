@@ -10,7 +10,6 @@ class Win:
         self.signy = 0 - greenwin_img.get_height()
         self.momentum_y = 1
         self.animation_time = 0
-        self.firework_intervall = 0
 
     def set_winner(self, winner):
         if winner == 0:
@@ -26,21 +25,11 @@ class Win:
         screen.fill((20, 27, 34))
         screen.blit(self.image, (self.signx, self.signy))
 
-    def fireworks(self, dt):
-        self.firework_intervall += dt
-        if self.firework_intervall > 500:
-            pygame.mixer.Sound.play(explosion_sound)
-            loc_x = random.randint(0, screen.get_width())
-            loc_y = random.randint(0, screen.get_height())
-            for i in range(60):
-                particle = Particle(loc_x, loc_y, [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)], 1000)
-            self.firework_intervall = 0
-
     def update(self, dt):
         self.animation_time += dt
         self.move_sign(dt)
         self.draw_sign()
-        self.fireworks(dt)
-        if self.animation_time >= 8000:
+        if self.animation_time >= 3000:
             self.animation_time = 0
+            pygame.mouse.set_visible(True)
             set_state('MENU')

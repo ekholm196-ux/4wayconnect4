@@ -21,7 +21,7 @@ screen_width = 480
 screen_height = 270
 screen = pygame.display.set_mode((screen_width, 270), pygame.SCALED | pygame.RESIZABLE)
 gameClock = pygame.time.Clock()
-state = 'GAME'
+state = 'MENU'
 layers = pygame.sprite.LayeredUpdates()
 particles = pygame.sprite.Group()
 
@@ -39,6 +39,11 @@ board_spritesheet = pygame.image.load(resource_path('game/sprites/board-sheet.pn
 grid_img = pygame.image.load(resource_path('game/sprites/grid-sheet.png')).convert_alpha()
 greenwin_img = pygame.image.load(resource_path('game/sprites/greenwins.png')).convert_alpha()
 redwin_img = pygame.image.load(resource_path('game/sprites/redwins.png')).convert_alpha()
+playbutton_img = pygame.image.load(resource_path('game/sprites/play.png')).convert_alpha()
+settingsbutton_img = pygame.image.load(resource_path('game/sprites/settings.png')).convert_alpha()
+menu_img = pygame.image.load(resource_path('game/sprites/menu_background.png')).convert_alpha()
+playbuttonhover_img = pygame.image.load(resource_path('game/sprites/play_hover.png')).convert_alpha()
+settingsbuttonhover_img = pygame.image.load(resource_path('game/sprites/settings_hover.png')).convert_alpha()
 play_sound = pygame.mixer.Sound(resource_path('game/sounds/play_coin.wav'))
 collision_sound = pygame.mixer.Sound(resource_path('game/sounds/collision.wav'))
 explosion_sound = pygame.mixer.Sound(resource_path('game/sounds/explosion.wav'))
@@ -47,3 +52,5 @@ collision_sound.set_volume(0.1)
 explosion_sound.set_volume(0.05)
 win_sound = pygame.mixer.Sound(resource_path('game/sounds/winsound.wav'))
 win_sound.set_volume(0.1)
+blip_sound = pygame.mixer.Sound(resource_path('game/sounds/blip.wav'))
+blip_sound.set_volume(0.2)
