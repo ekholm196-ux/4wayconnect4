@@ -57,7 +57,7 @@ class Input:
                 self.x = placement[0].x
                 self.y = placement[0].y
                 if (pygame.mouse.get_pressed()[0] and self.board.is_full(placement[1], placement[2], placement[3]) == False):
-                    coin = Coin(self.screen, self.image, placement[1], placement[2], (placement[0].x, placement[0].y), self.team, self.board, placement[3])
+                    coin = Coin(self.image, placement[1], placement[2], (placement[0].x, placement[0].y), self.team, self.board, placement[3])
                     self.board.add_coin(coin, placement[3])
                     pygame.mixer.Sound.play(self.sound)
                     self.team = (self.team + 1) % 2

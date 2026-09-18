@@ -122,6 +122,7 @@ class Board:
             self.win.set_winner(self.winner)
             self.winner = None
             self.score = [0, 0]
+            self.clear_board()
             set_state('END')
 
 
@@ -235,3 +236,7 @@ class Board:
 
         elif self.score[1] > self.score[0]:
             self.winner = 1
+
+    def clear_board(self):
+        self.grid = [[None] * 6 for _ in range(6)]
+        self.coins = []

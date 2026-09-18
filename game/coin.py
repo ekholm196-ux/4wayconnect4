@@ -4,7 +4,7 @@ from particle import Particle
 import random
 
 class Coin:
-    def __init__(self, screen, image, row, column, destination, team, board, direction):
+    def __init__(self, image, row, column, destination, team, board, direction):
         self.row = row
         self.col = column
         self.team = team
@@ -106,4 +106,3 @@ class Coin:
             self.animation_ended = False
             self.animate(dt)
         self.draw()
-    
