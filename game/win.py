@@ -32,4 +32,5 @@ class Win:
         if self.animation_time >= 3000:
             self.animation_time = 0
             pygame.mouse.set_visible(True)
+            self.signy = 0 - greenwin_img.get_height()
             set_state('MENU')
