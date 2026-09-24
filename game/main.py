@@ -1,13 +1,11 @@
 
 import pygame
-import os
-import sys
-import time
 from board import Board
 from input import Input
 from win import Win
 from utility import resource_path, particles, get_state
 from menu import Menu
+from settings import Settings
 
 #Setting up pygame
 pygame.init()
@@ -29,15 +27,20 @@ menu = Menu()
 win = Win()
 board = Board(win)
 input = Input(board)
+settings = Settings()
 while running:
     dt = gameClock.tick(280)
     state = get_state()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
     if state == 'MENU':
         menu.update()
 
+    elif state == 'SETTINGS':
+        settings.update(dt)
+    
     elif state == 'GAME':
         board.update(dt)
         particles.update(dt)
