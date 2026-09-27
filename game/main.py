@@ -39,7 +39,7 @@ while running:
         menu.update()
 
     elif state == 'SETTINGS':
-        settings.update(dt)
+        settings.update()
     
     elif state == 'GAME':
         board.update(dt)
