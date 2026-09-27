@@ -9,7 +9,6 @@ class Slider:
         self.slider_x = self.loc[0] + self.bar_img.get_width()*gauge_start
         self.slider_y = self.loc[1] - self.slider_img.get_height() / 2 + self.bar_img.get_height() / 2
         self.rect = pygame.Rect(self.slider_x - self.slider_img.get_width() / 2, self.slider_y, self.slider_img.get_width(), self.slider_img.get_height())
-        print(self.rect)
         self.value = gauge_start
         self.prev_pos = self.slider_x
         self.sliding = False
@@ -27,6 +26,7 @@ class Slider:
         if pygame.mouse.get_pressed()[0] and self.rect.collidepoint(pos) and not self.sliding:
             self.prev_pos = pos[0]
             self.sliding = True
+            pygame.mouse.set_visible(False)
         
         elif pygame.mouse.get_pressed()[0] and self.sliding:
             self.slider_x += pos[0] - self.prev_pos
@@ -39,6 +39,7 @@ class Slider:
             self.prev_pos = pos[0]
         else:
             self.sliding = False
+            pygame.mouse.set_visible(True)
 
     def get_value(self):
          return self.value

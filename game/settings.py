@@ -12,7 +12,6 @@ class Settings:
         self.fullscreen = settings.get('fullscreen')
         self.frame_rate_cap = settings.get('frame_rate_cap')
         self.background = menu_img
-        self.loc = (0, 0)
         self.mv_slider = Slider((50, 50), self.master_volume)
 
     def draw(self):
