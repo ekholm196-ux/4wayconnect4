@@ -1,6 +1,7 @@
 import sys
 import os
 import pygame
+import json
 
 def resource_path(relative_path):
     """" Get absolute path to resource, this is in case of converting to exe with PyInstaller """
@@ -24,11 +25,12 @@ gameClock = pygame.time.Clock()
 state = 'MENU'
 layers = pygame.sprite.LayeredUpdates()
 particles = pygame.sprite.Group()
-
+font = pygame.font.Font(resource_path('game/fonts/ARCADECLASSIC.TTF'), 16)
+#swapping game state
 def set_state(new_state):
     global state
     state = new_state
-
+#getting game state
 def get_state():
     global state
     return state
@@ -46,13 +48,23 @@ playbuttonhover_img = pygame.image.load(resource_path('game/sprites/play_hover.p
 settingsbuttonhover_img = pygame.image.load(resource_path('game/sprites/settings_hover.png')).convert_alpha()
 slider_img = pygame.image.load(resource_path('game/sprites/slider.png')).convert_alpha()
 bar_img = pygame.image.load(resource_path('game/sprites/slider_bar.png'))
+return_img = pygame.image.load(resource_path('game/sprites/return.png'))
+returnhover_img = pygame.image.load(resource_path('game/sprites/return_hover.png'))
 play_sound = pygame.mixer.Sound(resource_path('game/sounds/play_coin.wav'))
 collision_sound = pygame.mixer.Sound(resource_path('game/sounds/collision.wav'))
 explosion_sound = pygame.mixer.Sound(resource_path('game/sounds/explosion.wav'))
-play_sound.set_volume(0.1)
-collision_sound.set_volume(0.1)
-explosion_sound.set_volume(0.05)
-win_sound = pygame.mixer.Sound(resource_path('game/sounds/winsound.wav'))
-win_sound.set_volume(0.1)
 blip_sound = pygame.mixer.Sound(resource_path('game/sounds/blip.wav'))
-blip_sound.set_volume(0.2)
+win_sound = pygame.mixer.Sound(resource_path('game/sounds/winsound.wav'))
+theme_music = pygame.mixer.music.load(resource_path('game/sounds/theme.wav'))
+
+#load settings
+with open('game/settings.json', 'r') as file:
+    settings = json.load(file)
+    play_sound.set_volume(settings['master_volume']*settings['sound_effects'])
+    collision_sound.set_volume(settings['master_volume']*settings['sound_effects'])
+    explosion_sound.set_volume(settings['master_volume']*settings['sound_effects'])
+    win_sound.set_volume(settings['master_volume']*settings['sound_effects'])
+    blip_sound.set_volume(settings['master_volume']*settings['sound_effects'])
+    pygame.mixer.music.set_volume(settings['master_volume']*settings['music'])
+
+sfx = [blip_sound, win_sound, collision_sound, play_sound]

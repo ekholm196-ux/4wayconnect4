@@ -1,8 +1,7 @@
 {
     "master_volume": 0.5,
-    "music": 0.5,
-    "sound_effects": 0.5,
-    "fullscreen": true,
+    "music": 0.91,
+    "sound_effects": 0.33,
+    "fullscreen": false,
     "frame_rate_cap": 60
-
 }

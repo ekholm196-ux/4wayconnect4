@@ -3,7 +3,7 @@ import pygame
 from board import Board
 from input import Input
 from win import Win
-from utility import resource_path, particles, get_state
+from utility import particles, get_state
 from menu import Menu
 from settings import Settings
 
@@ -15,9 +15,10 @@ pygame.mouse.set_visible(True)
 screen_width = 480
 screen_height = 270
 gameClock = pygame.time.Clock()
-font = pygame.font.Font(resource_path('game/fonts/ARCADECLASSIC.TTF'), 16)
 #gameloop booleans
 running = True
+#music
+pygame.mixer.music.play(loops=-1)
 
 #for starting delta time
 dt = 0

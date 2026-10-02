@@ -240,3 +240,6 @@ class Board:
     def clear_board(self):
         self.grid = [[None] * 6 for _ in range(6)]
         self.coins = []
+
+    def get_winner(self):
+        return self.winner

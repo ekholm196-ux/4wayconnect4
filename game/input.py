@@ -62,3 +62,6 @@ class Input:
                     pygame.mixer.Sound.play(self.sound)
                     self.team = (self.team + 1) % 2
                     self.image = self.images[self.team]
+
+    def reset_team(self):
+        self.team = 0
