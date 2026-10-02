@@ -1,7 +1,6 @@
 import pygame
-from utility import resource_path, play_sound, screen, greencoin_img, redcoin_img
+from utility import play_sound, screen, greencoin_img, redcoin_img
 from coin import Coin
-import time
 
 class Input:
     def __init__(self, board):

@@ -1,4 +1,3 @@
-
 import pygame
 from board import Board
 from input import Input
@@ -8,10 +7,6 @@ from menu import Menu
 from settings import Settings
 
 #Setting up pygame
-pygame.init()
-pygame.mixer.init()
-pygame.display.set_caption('4WayConnect4')
-pygame.mouse.set_visible(True)
 screen_width = 480
 screen_height = 270
 gameClock = pygame.time.Clock()

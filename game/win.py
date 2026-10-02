@@ -1,6 +1,4 @@
-from utility import state, redwin_img, greenwin_img, screen, set_state, explosion_sound
-from particle import Particle
-import random
+from utility import state, redwin_img, greenwin_img, screen, set_state
 import pygame
 
 class Win:

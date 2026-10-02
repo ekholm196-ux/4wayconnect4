@@ -21,6 +21,7 @@ class Menu:
             button.update()
 
     def start(self):
+        pygame.mouse.set_visible(False)
         set_state('GAME')
 
     def settings(self):

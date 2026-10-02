@@ -1,6 +1,5 @@
 import pygame
-import time
-from utility import board_spritesheet, grid_img, screen, win_sound, greenwin_img, redwin_img, set_state
+from utility import board_spritesheet, grid_img, screen, win_sound, set_state
 
 class Board:
     def __init__(self, win):
